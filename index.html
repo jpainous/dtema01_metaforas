@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomía vs Fisiología - Metáforas de Danza</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 60px 50px;
+            min-height: 600px;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-number {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .metaphor-container {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .metaphor-box {
+            flex: 1;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .anatomy-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .physiology-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .metaphor-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .metaphor-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metaphor-content {
+            font-size: 22px;
+            line-height: 1.6;
+        }
+
+        .explanation {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .explanation-title {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .explanation-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .nav-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            font-size: 18px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #e0e0e0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .metaphor-container {
+                flex-direction: column;
+            }
+
+            .slide {
+                padding: 30px 20px;
+            }
+
+            .slide-title {
+                font-size: 32px;
+            }
+
+            .metaphor-content {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Slide 1: Título -->
+        <div class="slide active">
+            <div class="slide-number">Introducción</div>
+            <div class="slide-title">Anatomía vs Fisiología</div>
+            <div style="text-align: center; margin-top: 80px;">
+                <div style="font-size: 100px; margin-bottom: 30px;">🎭</div>
+                <p style="font-size: 24px; color: #666; line-height: 1.8;">
+                    <strong style="color: #f5576c;">La anatomía es el escenario</strong><br>
+                    <strong style="color: #4facfe;">La fisiología es la coreografía</strong>
+                </p>
+                <p style="font-size: 18px; color: #999; margin-top: 40px;">
+                    6 metáforas para entender la diferencia
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Instrumento y Música -->
+        <div class="slide">
+            <div class="slide-number">Metáfora 1 de 6</div>
+            <div class="slide-title">El instrumento y la música</div>
+            
+            <div class="metaphor-container">
+                <div class="metaphor-box anatomy-box">
+                    <div class="metaphor-icon">🎻</div>
+                    <div class="metaphor-label">Anatomía</div>
+                    <div class="metaphor-content">
+                        El <strong>instrumento</strong><br>
+                        <small>(la madera del violín, la forma de la caja de resonancia, la tensión física de las cuerdas)</small>
+                    </div>
+                </div>
+                
+                <div class="metaphor-box physiology-box">
+                    <div class="metaphor-icon">🎶</div>
+                    <div class="metaphor-label">Fisiología</div>
+                    <div class="metaphor-content">
+                        La <strong>música</strong><br>
+                        <small>(la vibración, la melodía, el sonido que se produce cuando el arco roza las cuerdas)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <div class="explanation-title">💡 ¿Por qué funciona?</div>
+                <div class="explanation-text">
+                    Muestra que tener las partes (huesos, órganos) no es suficiente; se necesita el proceso activo (metabolismo, contracción) para que el cuerpo "suene" y funcione.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Tarima y Amortiguación -->
+        <div class="slide">
+            <div class="slide-number">Metáfora 2 de 6</div>
+            <div class="slide-title">La tarima de danza y la amortiguación</div>
+            
+            <div class="metaphor-container">
+                <div class="metaphor-box anatomy-box">
+                    <div class="metaphor-icon">🪵</div>
+                    <div class="metaphor-label">Anatomía</div>
+                    <div class="metaphor-content">
+                        El <strong>suelo flotante o tarima</strong><br>
+                        <small>(los tablones de madera, los muelles, la estructura física y los materiales)</small>
+                    </div>
+                </div>
+                
+                <div class="metaphor-box physiology-box">
+                    <div class="metaphor-icon">🦘</div>
+                    <div class="metaphor-label">Fisiología</div>
+                    <div class="metaphor-content">
+                        La <strong>absorción del impacto y el rebote</strong><br>
+                        <small>(cómo responde y cede el suelo cuando un bailarín aterriza de un grand jeté para proteger las rodillas)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <div class="explanation-title">💡 ¿Por qué funciona?</div>
+                <div class="explanation-text">
+                    Ilustra la diferencia entre los materiales anatómicos (huesos, cartílagos, meniscos) y su función biomecánica (amortiguar fuerzas y redistribuir la carga).
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Partitura e Interpretación -->
+        <div class="slide">
+            <div class="slide-number">Metáfora 3 de 6</div>
+            <div class="slide-title">La partitura y la interpretación</div>
+            
+            <div class="metaphor-container">
+                <div class="metaphor-box anatomy-box">
+                    <div class="metaphor-icon">📜</div>
+                    <div class="metaphor-label">Anatomía</div>
+                    <div class="metaphor-content">
+                        La <strong>partitura</strong><br>
+                        <small>(las notas escritas en el papel, los silencios, la estructura estática de la obra)</small>
+                    </div>
+                </div>
+                
+                <div class="metaphor-box physiology-box">
+                    <div class="metaphor-icon">🎭</div>
+                    <div class="metaphor-label">Fisiología</div>
+                    <div class="metaphor-content">
+                        La <strong>interpretación</strong><br>
+                        <small>(el tempo, la intensidad, la respiración agitada del músico y la emoción que da vida a esas notas en tiempo real)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <div class="explanation-title">💡 ¿Por qué funciona?</div>
+                <div class="explanation-text">
+                    La anatomía es como el ADN o el mapa estructural del cuerpo; la fisiología es la expresión de esos genes y estructuras adaptándose al momento presente.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Zapatilla y Equilibrio -->
+        <div class="slide">
+            <div class="slide-number">Metáfora 4 de 6</div>
+            <div class="slide-title">La zapatilla de punta y el equilibrio dinámico</div>
+            
+            <div class="metaphor-container">
+                <div class="metaphor-box anatomy-box">
+                    <div class="metaphor-icon">🩰</div>
+                    <div class="metaphor-label">Anatomía</div>
+                    <div class="metaphor-content">
+                        La <strong>zapatilla de punta</strong><br>
+                        <small>(la caja dura, el raso, la suela, la forma de los huesos del pie)</small>
+                    </div>
+                </div>
+                
+                <div class="metaphor-box physiology-box">
+                    <div class="metaphor-icon">⚖️</div>
+                    <div class="metaphor-label">Fisiología</div>
+                    <div class="metaphor-content">
+                        El <strong>equilibrio dinámico y la propiocepción</strong><br>
+                        <small>(el micro-ajuste constante e invisible de los músculos del tobillo y el core para no caer mientras se sostiene el peso)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <div class="explanation-title">💡 ¿Por qué funciona?</div>
+                <div class="explanation-text">
+                    Destaca que la anatomía es el soporte pasivo, mientras que la fisiología es el control neurológico y activo que nos mantiene en pie.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Marioneta y Tensión -->
+        <div class="slide">
+            <div class="slide-number">Metáfora 5 de 6</div>
+            <div class="slide-title">La marioneta y la tensión de los hilos</div>
+            
+            <div class="metaphor-container">
+                <div class="metaphor-box anatomy-box">
+                    <div class="metaphor-icon">🪆</div>
+                    <div class="metaphor-label">Anatomía</div>
+                    <div class="metaphor-content">
+                        La <strong>marioneta</strong><br>
+                        <small>(las articulaciones de madera, los hilos que conectan las partes, el peso de los materiales)</small>
+                    </div>
+                </div>
+                
+                <div class="metaphor-box physiology-box">
+                    <div class="metaphor-icon">🧠</div>
+                    <div class="metaphor-label">Fisiología</div>
+                    <div class="metaphor-content">
+                        La <strong>acción de tirar de los hilos</strong><br>
+                        <small>(la tensión, la contracción y la coordinación que hacen que la marioneta camine o baile)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <div class="explanation-title">💡 ¿Por qué funciona?</div>
+                <div class="explanation-text">
+                    Es la metáfora perfecta para el sistema nervioso y muscular: los huesos son la madera, los tendones los hilos, y la fisiología es la orden cerebral (el impulso nervioso) que genera el movimiento.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Vestuario y Vuelo -->
+        <div class="slide">
+            <div class="slide-number">Metáfora 6 de 6</div>
+            <div class="slide-title">El vestuario y el vuelo de la tela</div>
+            
+            <div class="metaphor-container">
+                <div class="metaphor-box anatomy-box">
+                    <div class="metaphor-icon">👗</div>
+                    <div class="metaphor-label">Anatomía</div>
+                    <div class="metaphor-content">
+                        El <strong>vestuario</strong><br>
+                        <small>(la tela, las costuras, el peso y la forma del tutú o la falda)</small>
+                    </div>
+                </div>
+                
+                <div class="metaphor-box physiology-box">
+                    <div class="metaphor-icon">🌪️</div>
+                    <div class="metaphor-label">Fisiología</div>
+                    <div class="metaphor-content">
+                        El <strong>vuelo y la inercia</strong> de la tela al hacer un giro<br>
+                        <small>(cómo reacciona el material a la fuerza centrífuga, al calor del cuerpo y al sudor)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <div class="explanation-title">💡 ¿Por qué funciona?</div>
+                <div class="explanation-text">
+                    Ayuda a entender conceptos como la termodinámica o la homeostasis: la anatomía es el tejido (piel, glándulas sudoríparas), la fisiología es cómo ese tejido reacciona al calor y al movimiento para enfriar el cuerpo.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conclusión -->
+        <div class="slide">
+            <div class="slide-number">Conclusión</div>
+            <div class="slide-title">¡Recuerda!</div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <div style="font-size: 80px; margin-bottom: 40px;">🎓</div>
+                
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 15px; margin-bottom: 20px; color: white;">
+                    <h3 style="font-size: 28px; margin-bottom: 15px;">ANATOMÍA</h3>
+                    <p style="font-size: 20px;">Estructura • Forma • Estática • Las partes</p>
+                </div>
+
+                <div style="font-size: 40px; margin: 30px 0;">⬇️</div>
+
+                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 15px; color: white;">
+                    <h3 style="font-size: 28px; margin-bottom: 15px;">FISIOLOGÍA</h3>
+                    <p style="font-size: 20px;">Función • Movimiento • Dinámica • Los procesos</p>
+                </div>
+
+                <p style="font-size: 22px; color: #666; margin-top: 50px; line-height: 1.8;">
+                    <strong>La anatomía es el escenario</strong><br>
+                    <strong>La fisiología es la coreografía</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+            <div class="slide-counter" id="slideCounter">1 / 8</div>
+            <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            
+            document.getElementById('slideCounter').textContent = `${n + 1} / ${totalSlides}`;
+            document.getElementById('progressFill').style.width = `${((n + 1) / totalSlides) * 100}%`;
+            
+            document.getElementById('prevBtn').disabled = n === 0;
+            document.getElementById('nextBtn').disabled = n === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            showSlide(currentSlide);
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Inicializar
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
